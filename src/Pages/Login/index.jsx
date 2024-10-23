@@ -8,14 +8,14 @@ import axios from 'axios';
 import { API_URL } from '../../config/API';
 import { setLoginAtom, authAtom } from '../../store/AuthStore';
 import base64 from 'react-native-base64';
-import MMKVStorage from 'react-native-mmkv-storage';
+// import MMKVStorage from 'react-native-mmkv-storage';
 
-const MMKV = new MMKVStorage.Loader().initialize();
+// const MMKV = new MMKVStorage.Loader().initialize();
 
 const Login = () => {
     const [form, setForm] = useForm({ nik: '', password: '' });
     const [, setLogin] = useAtom(setLoginAtom);
-    const [, setAuth] = useAtom(authAtom); // Status autentikasi
+    // const [, setAuth] = useAtom(authAtom); // Status autentikasi
     const [validation, setValidation] = useState({ nik: true, password: true });
     const currentYear = new Date().getFullYear();
 
@@ -42,11 +42,11 @@ const Login = () => {
             if (response.data.data) {
                 const userData = response.data.data;
                 setLogin(userData); // Simpan di Jotai (state management)
-                setAuth(true);      // Set status autentikasi
+                // setAuth(true);      // Set status autentikasi
 
                 // Simpan di MMKV
-                MMKV.setString('userData', JSON.stringify(userData));
-                MMKV.setBool('isLoggedIn', true);
+                // MMKV.setString('userData', JSON.stringify(userData));
+                // MMKV.setBool('isLoggedIn', true);
                 
                 console.log('Login sukses, data tersimpan di Jotai dan MMKV:', JSON.stringify(userData));
             } else {
